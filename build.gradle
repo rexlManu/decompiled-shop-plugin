@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        url = "http://repo.citizensnpcs.co/"
+    }
+    maven {
+        url = "https://jitpack.io"
+    }
+    maven {
+        url = "https://repo.extendedclip.com/content/repositories/placeholderapi/"
+    }
+    maven({ url = "https://repo.codemc.org/repository/maven-public" })
+}
+
+dependencies {
+    compile group: 'commons-io', name: 'commons-io', version: '2.9.0'
+
+    implementation "org.bstats:bstats-bukkit:1.5"
+    implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'com.github.MilkBowl:VaultAPI:1.7'
+    implementation 'net.citizensnpcs:citizensapi:2.0.27-SNAPSHOT'
+    implementation 'me.clip:placeholderapi:2.10.9'
+}
+
+jar {
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    // destinationDirectory.set(file("C:\\Users\\Emman\\Desktop\\plugin-testserver\\plugins"))
+}
